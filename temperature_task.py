@@ -2,6 +2,7 @@
 An app that converts temperature beween F and C
 
 Version 1: basic functions that convert temperature: no validation at all
+Version 2: change to a responsive layout using wieght
  '''
 
 from tkinter import *
@@ -11,11 +12,14 @@ class Converter:
     def __init__(self):
         self.root = Tk()
         self.root.title("Temperature Converter")
+        self.root.grid_rowconfigure(0,weight=1)
+        self.root.grid_columnconfigure(0,weight=1)
 
         # Container for frames
         self.container = Frame(self.root)
         self.container.grid()
-
+        self.container.grid_rowconfigure(0,weight=1)
+        self.container.grid_columnconfigure(0,weight=1)
 
         # Dictionary to hold frames
         self.frames = {}
@@ -25,6 +29,7 @@ class Converter:
 
         # Show the initial frame
         self.show_frame("MainFrame")
+
 
     def run(self):
         '''runs the program'''
@@ -37,8 +42,14 @@ class Converter:
 
     def create_main_frame(self):
         '''Create the mainframe'''
+        
         frame = Frame(self.container)
         frame.grid(row=0, column=0, sticky=NSEW)
+        
+        for i in range(2):
+            frame.grid_rowconfigure(i, weight=1)
+        for j in range(2):
+            frame.grid_columnconfigure(j, weight=1)            
 
         heading = Label(frame, text="Temperature Converter", font="Verdana 16 bold")
         heading.grid(row=0, column=0, columnspan=2, sticky=NSEW)
@@ -55,6 +66,11 @@ class Converter:
         '''Create the frame to convert Fahrenheit to Celsius'''
         frame = Frame(self.container)
         frame.grid(row=0, column=0, sticky=NSEW)
+        
+        for i in range(4):
+            frame.grid_rowconfigure(i, weight=1)
+        for j in range(3):
+            frame.grid_columnconfigure(j, weight=1)
 
         label = Label(frame, text="Enter the temperature in Fahrenheit", font="Verdana 14 bold")
         label.grid(row=0, column=0, columnspan=3, sticky=NSEW)
@@ -80,6 +96,11 @@ class Converter:
         '''Create the frame to convert Celsius to Fahrenheit'''
         frame = Frame(self.container)
         frame.grid(row=0, column=0, sticky=NSEW)
+        
+        for i in range(4):
+            frame.grid_rowconfigure(i, weight=1)
+        for j in range(3):
+            frame.grid_columnconfigure(j, weight=1)
 
         label = Label(frame, text="Enter the temperature in celsius", font="Verdana 14 bold")
         label.grid(row=0, column=0, columnspan=3, sticky=NSEW)
