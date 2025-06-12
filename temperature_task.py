@@ -3,6 +3,7 @@ An app that converts temperature beween F and C
 
 Version 1: basic functions that convert temperature: no validation at all
 Version 2: change to a responsive layout using wieght
+Version 3: validate input in the entry box
  '''
 
 from tkinter import *
@@ -124,15 +125,32 @@ class Converter:
 
     def convert_to_celsius(self):
         '''converts the fahrenheit input (from entry box) and converts it to celsius'''
-        fahrenheit = float(self.fahrenheit_entry.get())
-        celsius = (fahrenheit - 32) * 5 / 9
-        self.converted_c_result.config(text=f"It is {celsius:.2f}°C")
+        try: 
+            fahrenheit = float(self.fahrenheit_entry.get())
+        except ValueError:
+            self.converted_c_result.config(text=f"Invalid Input - Please enter a number")
+            return
+
+        if fahrenheit < -459.67:
+            self.converted_c_result.config(text=f"Invalid Temperature - Too Low")          
+
+        elif fahrenheit > -459.67:
+            celsius = (fahrenheit - 32) * 5 / 9
+            self.converted_c_result.config(text=f"It is {celsius:.2f}°C")
 
     def convert_to_fahrenheit(self):
         '''converts the celsius input (from entry box) and converts it to fahrenheit'''
-        celsius = float(self.celsius_entry.get())
-        fahrenheit = (celsius * 9 / 5) + 32
-        self.converted_f_result.config(text=f"It is: {fahrenheit:.2f}°F")
+        try: 
+            celsius = float(self.celsius_entry.get())
+        except ValueError:
+            self.converted_f_result.config(text=f"Invalid Input - Please enter a number")
+            return
+        
+        if celsius < -275.15:
+            self.converted_f_result.config(text=f"Invalid Temperature - Too Low")
+        elif celsius > -275.15:
+            fahrenheit = (celsius * 9 / 5) + 32
+            self.converted_f_result.config(text=f"It is: {fahrenheit:.2f}°F")
     
     def reset(self):
         '''resets the entry box'''
