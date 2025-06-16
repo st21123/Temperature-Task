@@ -18,7 +18,7 @@ class Converter:
 
         # Container for frames
         self.container = Frame(self.root)
-        self.container.grid()
+        self.container.grid(row=0, column=0, sticky=NSEW)
         self.container.grid_rowconfigure(0,weight=1)
         self.container.grid_columnconfigure(0,weight=1)
 
